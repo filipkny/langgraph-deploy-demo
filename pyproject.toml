@@ -21,6 +21,7 @@ langfuse = "^2.57.4"
 langgraph-checkpoint-postgres = "^2.0.9"
 logging = "^0.4.9.6"
 langchain-anthropic = "^0.3.1"
+psycopg-binary = "^3.2.3"
 
 
 [build-system]

@@ -34,10 +34,12 @@ def api_key_auth(x_api_key: str = Depends(X_API_KEY)):
 # Add a route to run the ai agent
 @app.post("/generate", dependencies=[Depends(api_key_auth)])
 async def generate_route(state: State):
-    async with AsyncPostgresStore.from_conn_string(os.environ["DB_URL"]) as store:
+    async with AsyncPostgresStore.from_conn_string(
+        os.environ["DATABASE_URL"]
+    ) as store:
         await store.setup()
         async with AsyncPostgresSaver.from_conn_string(
-            os.environ["DB_URL"]
+            os.environ["DATABASE_URL"]
         ) as checkpointer:
             await checkpointer.setup()
             graph = builder.compile(

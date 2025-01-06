@@ -10,7 +10,7 @@ services:
   #   depends_on:
   #     - langgraph_demo_db
   #   environment:
-  #     - DB_URL=postgresql://langgraph_demo:langgraph_demo@localhost:5432/postgres
+  #     - DATABASE_URL=postgresql://langgraph_demo:langgraph_demo@localhost:5432/postgres
   #   networks:
   #     - langgraph_network
 

@@ -22,7 +22,9 @@ logger = logging.getLogger(__name__)
 llm = init_chat_model()
 
 
-async def call_model(state: State, config: RunnableConfig, *, store: BaseStore) -> dict:
+async def call_model(
+    state: State, config: RunnableConfig, *, store: BaseStore
+) -> dict:
     """Extract the user's state from the conversation and update the memory."""
     configurable = configuration.Configuration.from_runnable_config(config)
 
@@ -35,7 +37,8 @@ async def call_model(state: State, config: RunnableConfig, *, store: BaseStore) 
 
     # Format memories for inclusion in the prompt
     formatted = "\n".join(
-        f"[{mem.key}]: {mem.value} (similarity: {mem.score})" for mem in memories
+        f"[{mem.key}]: {mem.value} (similarity: {mem.score})"
+        for mem in memories
     )
     if formatted:
         formatted = f"""
@@ -59,7 +62,9 @@ async def call_model(state: State, config: RunnableConfig, *, store: BaseStore) 
     return {"messages": [msg]}
 
 
-async def store_memory(state: State, config: RunnableConfig, *, store: BaseStore):
+async def store_memory(
+    state: State, config: RunnableConfig, *, store: BaseStore
+):
     # Extract tool calls from the last message
     tool_calls = state.messages[-1].tool_calls
 
@@ -101,9 +106,11 @@ builder = StateGraph(State, config_schema=configuration.Configuration)
 builder.add_node(call_model)
 builder.add_edge("__start__", "call_model")
 builder.add_node(store_memory)
-builder.add_conditional_edges("call_model", route_message, ["store_memory", END])
+builder.add_conditional_edges(
+    "call_model", route_message, ["store_memory", END]
+)
 # Right now, we're returning control to the user after storing a memory
 # Depending on the model, you may want to route back to the model
 # to let it first store memories, then generate a response
 builder.add_edge("store_memory", "call_model")
-DB_URL = os.environ["DB_URL"]
+DATABASE_URL = os.environ["DATABASE_URL"]
