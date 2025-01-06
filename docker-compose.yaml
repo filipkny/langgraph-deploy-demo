@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # langgraph_demo:
+  #   build: .
+  #   command: >
+  #     bash -c "python server.py"
+  #   ports:
+  #     - 8000:8000
+  #   depends_on:
+  #     - langgraph_demo_db
+  #   environment:
+  #     - DB_URL=postgresql://langgraph_demo:langgraph_demo@localhost:5432/postgres
+  #   networks:
+  #     - langgraph_network
+
+  langgraph_demo_db:
+    image: postgres:15
+    container_name: langgraph_demo_db
+    restart: always
+    environment:
+      POSTGRES_USER: langgraph_demo
+      POSTGRES_PASSWORD: langgraph_demo
+    ports:
+      - '5432:5432'
+    volumes:
+      - langgraph_demo_db:/var/lib/postgresql/data
+    networks:
+      - langgraph_network
+
+volumes:
+  langgraph_demo_db:
+    driver: local
+
+networks:
+  langgraph_network:
+    driver: bridge
