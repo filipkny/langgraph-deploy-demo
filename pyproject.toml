@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "langgraph_deploy_demo"
+version = "0.1.0"
+description = "A LangGraph deployment on Fly.io"
+authors = ["indiefilipk <indiefilipk@gmail.com>"]
+readme = "README.md"
+package-mode = true
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langgraph = "^0.2.60"
+langchain-core = "^0.3.29"
+langchain-community = "^0.3.14"
+langchain-openai = "^0.2.14"
+trustcall = "^0.0.26"
+ipython = "^8.31.0"
+fastapi = "^0.115.6"
+python-dateutil = "^2.9.0.post0"
+uvicorn = "^0.34.0"
+langgraph-checkpoint-postgres = "^2.0.9"
+langchain-anthropic = "^0.3.1"
+psycopg-binary = "^3.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
